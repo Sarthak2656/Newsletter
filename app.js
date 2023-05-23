@@ -3,6 +3,8 @@ const app=express();
 const bp=require("body-parser");
 const request=require("request");
 const https=require("https");
+require('dotenv').config();
+
 app.use(bp.urlencoded({extended:true}));
 app.use(express.static("Dir1"));
 app.get("/",function(req,res)
@@ -30,7 +32,7 @@ app.post("/",function(req,res)
     const url="https://us8.api.mailchimp.com/3.0/lists/43055f84a3";
     const options={
         method:"POST",
-        auth:"Sarthak1:d1e42c27b3158f54cd66bd8cb99b9b3e-us8",
+        auth:"Sarthak1:"+process.env.Api_key,
     }
     const request=https.request(url,options,function(resp)
     {
@@ -57,5 +59,5 @@ app.listen(process.env.PORT||3000,function()
     console.log("Server started at port 3000")
 })
 
-//d1e42c27b3158f54cd66bd8cb99b9b3e-us8   --api key
+//dc88bd785c1e8a18cdbdde8e3cbed07c-us8   --api key
 //43055f84a3  --audience id
